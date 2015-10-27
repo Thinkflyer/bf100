@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>新闻列表</title>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<script src="js/config.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/zepto.min.js"></script>
+
+	</head>
+	<style>
+		html,
+			body,
+			.mui-content {
+				background-color: #ffffff;
+			}
+			.mui-bar-nav {
+				background-color: #780005;
+			}
+			#leftmenu,
+			#setting,
+			.mui-title {
+				color: #ffffff;
+			}
+			.mui-table-view::after {
+				background-color: #FFFFFF;
+			}
+			.mui-grid-view.mui-grid-9 {
+				background-color: #ffffff;
+			}
+			
+			.mui-title , .mui-icon-back{
+				color:#ffffff;
+			}
+			.mui-control-content {
+				min-height: 500px;
+			}
+			#back{color:#ffffff}
+
+			.hd {
+			    height: 15px;
+			}
+			#slider{padding-top:5px}
+			.mui-table-view-cell{list-style-type: none;}
+		
+
+#sliderSegmentedControl{text-align:center;}
+#sliderSegmentedControl a:link{background-color:#000000;color:#ffffff;}
+#sliderSegmentedControl a:hover{background-color:#780005;font-weight: bold; }
+
+.mui-control-item{border-radius: 5px;margin-right:10px;background-color:#000000; border: 0px solid #cbcbcb;}
+#sliderSegmentedControl {text-align:center;}
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-group .mui-slider-item {
+    border: none;
+}
+.title_box{width:145px;float:left;margin:0px 5px 0px 5px;}
+</style>
+
+<body>
+	<header class="mui-bar mui-bar-nav" >
+			<h1 class="mui-title">包创业</h1>
+			<a class="mui-icon mui-action-back mui-icon-back mui-pull-left" id="back"></a>
+			<h1 class="mui-title detail-title"></h1>
+		</header>
+	<div class="mui-content">
+		<input type="hidden" id="page" name="page" value="1" />
+			<input type="hidden" id="cid" name="cid" value="1" />
+			<div id="slider" class="mui-slider">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" >
+			<div class="title_box title_left"><a class="mui-control-item" href="#item1mobile">金融机构</a></div>
+				<div class="title_box"> <a class="mui-control-item" href="#item2mobile">
+				贷款公司
+			</a></div>
+					
+				</div>
+			
+				<div class="mui-slider-group" id="itemgroup">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<div class="mui-loading">
+								<ul class="mui-table-view">
+								</ul>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<div class="mui-loading">
+									<div class="mui-spinner">
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+		<script src="js/app.js"></script>
+		<script>
+			var html=Array();
+			mui.init({
+				swipeBack: false
+			});
+			var sid=null;
+			var m_token=0;
+			var plusReady = function() {
+				var self = plus.webview.currentWebview();
+				sid = self.sid;
+				var arr_sid=Array();
+				var page=0;
+				arr_sid = sid.split(",");
+				var i = arr_sid.length;
+				var page = Zepto('#page').val(),
+						cid = Zepto('#cid').val();
+					Zepto('#page').val(parseInt(page) + 1);
+					
+				while (i--) {
+					var n=0;
+					//获取内容项目
+					if(arr_sid[i]>0){
+						sid=arr_sid[i];
+															
+
+							mui.ajax({
+							type: 'GET',
+							dataType: 'json',
+							url: baseDomain + "index.php?g=Api&m=Index&a=newslist",
+							data: {p: page, cid :sid,m_token : m_token},
+							success: function(json) {
+								var msg = eval(json);
+								if (msg.code == 200) {
+									html[n]="";
+									Zepto.each(msg.data, function(i,v) {
+										html[n]+= '<li class="mui-table-view-cell"><a linkurl="detail.html" open-type="page" open-sid="' + v.id + '">'+ v.title +'</a></li>';
+									 // Zepto('#newslist').append(str);
+									});
+									n++;
+								} 
+							}
+						});
+					}
+				}
+						
+			var title = self.title;
+			if(title!="") 	Zepto('#title').html(title);
+			var self = plus.webview.currentWebview();
+				if(self.more!=1){
+					var state = app.getState();
+					m_token=state.token;
+			}
+				plus.nativeUI.closeWaiting();
+			
+			
+			
+			mui('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+	
+				var item1 = document.getElementById('item1mobile');
+				var item2 = document.getElementById('item2mobile');
+				document.getElementById('slider').addEventListener('slide', function(e) {
+					if (e.detail.slideNumber === 0) {
+						if (item1.querySelector('.mui-loading')) {
+							setTimeout(function() {
+								item1.querySelector('.mui-scroll').innerHTML = html[0];
+							}, 500);
+						}
+					} else if (e.detail.slideNumber === 1) {
+						if (item2.querySelector('.mui-loading')) {
+							setTimeout(function() {
+								item2.querySelector('.mui-scroll').innerHTML = html[1];
+							}, 500);
+						}
+					}
+				});
+				setTimeout(function() {
+					item1.querySelector('.mui-scroll').innerHTML = html[0];
+				}, 500);
+							
+//				var sliderSegmentedControl = document.getElementById('sliderSegmentedControl');
+//				mui('.mui-input-group').on('change', 'input', function() {
+//					if (this.checked) {
+//						//sliderSegmentedControl.className = 'mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-' + this.value;
+//						//sliderProgressBar.setAttribute('style', sliderProgressBar.getAttribute('style'));
+//					}
+//				});
+			
+			
+				mui('#itemgroup').on('tap', 'a', function() {
+				var type = this.getAttribute("open-type");
+				var linkurl = this.getAttribute('linkurl');
+				var sid = this.getAttribute('open-sid');
+				mui.openWindow({
+					id: linkurl,
+					url: linkurl,
+					waiting: {
+						autoShow: true,
+						 title:'正在加载...',//等待对话框上显示的提示内容
+					},
+					styles: {
+						zindex: 1,
+					},
+					extras: {
+						sid: sid,
+    						type: type
+					}
+				});
+			});
+			
+			}
+
+			if (window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener('plusready', plusReady, false);
+			}
+	
+		</script>
+
+	</body>
+
+</html>

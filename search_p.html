@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/zepto.min.js"></script>
+		<script src="js/mui.min.js"></script>
+		<script src="js/config.js"></script>
+		<style>
+			html,
+			body,
+			.mui-content {
+				clear: both;
+				background: url('images/cm1_708X922.png') #D7CABF no-repeat top fixed;
+				background-size: 100% auto;
+				background-repeat: none;
+			}
+			.article {
+				background: none repeat 0 0 #fff;
+				border-radius: 5px;
+				margin: 0 auto;
+				padding: 10px;
+				width: 90%;
+				margin-top: 38%;
+			}
+			.mui-title,
+			.mui-bar .mui-btn-link {
+				color: #fff;
+			}
+			.mui-input-row {
+				margin: 0 auto;
+				position: relative;
+				width: 250px;
+			}
+			.mui-input-row input {
+				background-color: #ffffff;
+				height: 40px;
+				line-height: 21px;
+				outline: 0 none;
+				padding: 10px 15px;
+				border: 1px solid #C2C2C2;
+			}
+			.mui-bar-nav {
+				background-color: #780005;
+				background: none;
+				box-shadow: none;
+			}
+			.btn-color {
+				background-color: #780005;
+				border: none;
+				width: 250px;
+				padding: 10px;
+				margin-top: 10px;
+			}
+			.mui-select {
+				background-color: #ffffff;
+				border: 1px solid #C2C2C2 !important;
+				color: #000000;
+				padding-left: 14px !important;
+			}
+			.mui-content-padded {
+				margin-top: 25px;
+			}
+			.get_auth {
+				background-color: #780005;
+				color: #FFFFFF;
+				height: 40px;
+				line-height: 20px;
+				border: 0;
+				font-size: 0.7em;
+				margin-left: 5px;
+				float: right;
+			}
+			#m_auth {
+				float: left;
+				width: 140px;
+			}
+			#auth {
+				float: left;
+				width: 90px;
+			}
+		  .back_box{
+		  	display: none;
+		  }
+		  #loadding{display: none;}
+		</style>
+
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+				<span class="mui-icon mui-icon-left-nav"></span></button>
+		</header>
+		<div class="mui-content article" id="result">
+			<div id="loadding"></div>
+			<div class="mui-input-row ">
+				<input id='m_company' type="text" value="" class="mui-input-clear mui-input" placeholder="请输入公司名称或注册号">
+			</div>
+			
+			<div class="mui-input-row">
+				<input id='m_mobile' type="text" value="" class="mui-input-clear mui-input" placeholder="手机号码">
+			</div>
+
+			<div class="mui-input-row">
+				<input id='m_auth' type="text" value="" maxlength="6" class=" mui-input" placeholder="验证码">
+				<button id="get_auth" class="get_auth mui-btn-negative">获取验证码</button>
+			</div>
+			<div class="mui-input-row">
+				<button id='search' class="btn-color mui-btn-block mui-btn-negative">查询</button>
+			</div>
+		</div>
+		<div class="mui-input-row back_box">
+				<button class="btn-color  mui-action-back mui-btn-block mui-btn-negative">返回</button>
+		</div>
+		<script src="js/app.js"></script>
+		<script>
+			(function($, doc) {
+				$.init();
+				$.plusReady(function() {
+					var mainPage = $.preload({
+						"id": 'main',
+						"url": 'main.html'
+					});
+					var toMain = function() {
+						$.fire(mainPage, 'show', null);
+						setTimeout(function() {
+							$.openWindow({
+								id: 'main',
+								url: 'main.html',
+								show: {
+									aniShow: 'pop-in'
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+						}, 100);
+					};
+					//*点击获取验证码*/	
+					var get_auth = doc.getElementById('get_auth');
+					get_auth.addEventListener('tap', function(event) {
+						var mobile = doc.getElementById('m_mobile');
+						var _mobile = mobile.value;
+						if (!_mobile) {
+							plus.nativeUI.toast('手机号码不能为空');
+							return;
+						} else {
+							var mflag = regBox.regMobile.test(_mobile);
+							if (!(mflag)) {
+								plus.nativeUI.toast("手机号码有误！");
+								return false;
+							}
+						}
+						timer(10);
+						//提交获取短信
+						$.ajax({
+							type: 'POST',
+							dataType: 'json',
+							url: baseDomain + "index.php?g=Api&m=Index&a=getauth",
+							data: {
+								mobile: _mobile
+							},
+							success: function(msg) {
+								if (msg.code == 0) {
+									plus.nativeUI.toast(msg.info);
+								} else {
+									plus.nativeUI.toast(msg.info);
+								}
+							},
+							error: function(xhr, type, errorThrown) {
+								//异常处理
+								plus.nativeUI.toast(mylang.error_network);
+								//console.log(JSON.stringify(xhr));
+							}
+						});
+					});
+					//点击查询event
+					var get_search = doc.getElementById('search');
+					get_search.addEventListener('tap', function(event) {
+						var _m_company = doc.getElementById('m_company').value;
+						var _mobile = doc.getElementById('m_mobile').value;
+						var _m_auth = doc.getElementById('m_auth').value;
+						if (!_m_company) {
+							plus.nativeUI.toast('公司名称不能为空');
+							return false;
+						} else if (!_m_auth) {
+							plus.nativeUI.toast('验证码不能为空');
+							return false
+						} else {
+							if (!_mobile) {
+								plus.nativeUI.toast('手机号码不能为空');
+								return;
+							} else {
+								var mflag = regBox.regMobile.test(_mobile);
+								if (!(mflag)) {
+									plus.nativeUI.toast("手机号码有误！");
+									return false;
+								}
+							}
+						}
+						plus.nativeUI.showWaiting();
+						Zepto('#loadding').show();
+						$.ajax({
+							type: 'POST',
+							dataType: 'json',
+							cache: false,
+							url: baseDomain + "index.php?g=Api&m=Index&a=search_company2",
+							data: {
+								company: _m_company,
+								mobile: _mobile,
+								send_auth: _m_auth
+							},
+							success: function(data) {
+							  Zepto('#loadding').hide();
+								if(data.code == 0) {plus.nativeUI.toast(data.Message); return false;}
+								if (data.Status == 200) {
+									var cie = parseInt(100 / (parseInt(eval(data.Result).length) + 1));
+									Zepto('#result').html("");
+									Zepto('#result').append("<p>您查询的是:<span class='cname'>" + _m_company + "</span></p>");
+									Zepto('#result').append("<p>已查询到<span class='cname_h1'> " + eval(data.Result).length + " </span>项 , 已有数据: 通过率 <span class='cname_h1'>" + cie + "%</span></p>");
+									for (var i = 0; i < eval(data.Result).length; i++) {
+										Zepto('#result').append("<div class='company_list'><li><span class='cname'>" + data.Result[i].Name + "</span></li><span  class='cname_gray'>所在工商管理局: " + data.Result[i].BelongOrg + "&nbsp;&nbsp; 法人: " + data.Result[i].OperName + "&nbsp;&nbsp; 企业状态: " + data.Result[i].Status + "</span></div>");
+									}
+									Zepto('.back_box').show();
+								} else {
+									Zepto('#result').html(data.Message);
+								}
+							},
+							error: function() {
+								plus.nativeUI.toast("服务器通讯异常");
+							}
+						});
+						
+						plus.nativeUI.closeWaiting();
+					});
+				});
+			}(mui, document));
+
+			function timer(time) {
+				var btn = Zepto('#get_auth');
+				btn.attr("disabled", true); //按钮禁止点击
+				btn.html(time <= 0 ? "发送动态密码" : ((time) + "秒后可发送"));
+				var hander = setInterval(function() {
+					if (time <= 0) {
+						clearInterval(hander); //清除倒计时
+						btn.html("获取验证码");
+						btn.removeAttr("disabled");
+						return false;
+					} else {
+						btn.html((time--) + "秒后可发送");
+					}
+				}, 1000);
+			}
+		</script>
+	</body>
+
+</html>

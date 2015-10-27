@@ -1,0 +1,45 @@
+var plusReady = function() {
+				var self = plus.webview.currentWebview();
+				var m_type = self.sid;
+				var state = app.getState();
+				var m_token=state.token;
+			//监听提交 操作
+			document.getElementById('postButton').addEventListener('tap', function(event) {	
+				alert(1);
+					var content = document.getElementById('content');
+					var m_content = content.value;
+					if(!m_content) {
+						plus.nativeUI.toast(mylang['error_no_empty']);
+						return false;
+					}
+					plus.nativeUI.showWaiting();
+					mui.ajax({
+						type: 'POST',
+						dataType: 'json',
+						url: baseDomain + "index.php?g=Api&m=Index&a=post_content",
+						data: {'m_type': m_type,'m_content': m_content,,'m_token': m_token },
+						success: function(json) {
+							var msg = eval(json);
+		 					alert(msg.info);
+						},error:function(xhr,type,errorThrown){
+							//异常处理
+							plus.nativeUI.toast(mylang['error_network']);
+							//console.log(JSON.stringify(xhr));
+						}
+					});
+				
+				});
+				
+				
+				plus.nativeUI.closeWaiting();
+			};
+			if (window.plus) {
+				plusReady();
+			} else {
+				document.addEventListener('plusready', plusReady, false);
+			}
+			 //页面加载完成需要等待load
+			var loadSuccess = function() {
+				plus.nativeUI.closeWaiting();
+			};
+			window.addEventListener('load', loadSuccess, false);
