@@ -127,11 +127,7 @@
 			} else {
 				document.addEventListener('plusready', plusReady, false);
 			}
-			 //页面加载完成需要等待load
-			var loadSuccess = function() {
-				plus.nativeUI.closeWaiting();
-			};
-			window.addEventListener('load', loadSuccess, false);
+		
 			
 			mui('.mui-content').on('tap', 'a', function() {
 				var id = this.getAttribute("href");

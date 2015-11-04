@@ -75,9 +75,6 @@
 			var plusReady = function() {
 				var self = plus.webview.currentWebview();
 				sid = self.sid;
-				
-				 
-				plus.nativeUI.closeWaiting();
 			};
 			if (window.plus) {
 				plusReady();
@@ -113,6 +110,8 @@
 							console.log(JSON.stringify(xhr));
 						}
 					});
+				plus.nativeUI.closeWaiting();
+
 				}
 				//触发第一页
 			if (mui.os.plus) {
@@ -127,6 +126,8 @@
 					mui('#pullrefresh').pullRefresh().pullupLoading();
 				});
 			}
+							 //页面加载完成需要等待load
+			
 			 //主列表点击事件
 			mui('#pullrefresh').on('tap', 'li', function() {
 				var type = this.getAttribute("open-type");

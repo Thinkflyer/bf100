@@ -1,9 +1,9 @@
 {
 	"@platforms": ["android", "iPhone", "iPad"],
-	"id": "H5E0C59A6",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"id": "cn.frun.DeveloperApp",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "包创业",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.2",/*应用版本名称*/
+		"name": "1.0.4",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -17,43 +17,28 @@
 		"url": "http://www.frun.cn"
 	},
 	"permissions": {
-		"Accelerometer": {},
-		"Audio": {},
+
+
 		"Cache": {
 			"description": "管理应用缓存"
 		},
-		"Camera": {},
+
 		"Console": {
 			"description": "跟踪调试输出日志"
 		},
-		"Contacts": {},
-		"Device": {},
-		"Downloader": {},
+
+
+
 		"Events": {
 			"description": "应用扩展事件"
 		},
-		"File": {},
-		"Gallery": {},
-		"Geolocation": {},
-		"Invocation": {},
-		"Messaging": {},
-		"Orientation": {},
-		"Proximity": {},
-		"Storage": {},
-		"Uploader": {},
 		"Runtime": {},
-		"XMLHttpRequest": {},
-		"Zip": {},
-		"Barcode": {},
-		"Maps": {},
-
 		"Webview": {},
+		"Storage": {},
 		"NativeUI": {},
-		"Navigator": {},
-	
-		"Speech": {},
-	
-		"NativeObj": {}
+		"NativeObj": {},
+		"Invocation": {},
+		"XMLHttpRequest": {},"Zip":{},"Device":{},"Navigator":{},"Orientation":{}
 	},
 	"plus": {
 		"splashscreen": {
@@ -61,18 +46,12 @@
 			"waiting": true,
 			"delay": "0"
 		},
-		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {
 			"plugins": {
-				"share": {
-					
-					
-					
-				},
-				"oauth": {
-					
-				}
+				"share": {},
+				"oauth": {}
 			},
 			"apple": {
 				"appid": "bf100",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
@@ -88,7 +67,7 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
+				"permissions": ["<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>"]
 			},
 			"orientation": ["portrait-primary", "portrait-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
 			"icons": {
@@ -103,7 +82,9 @@
 						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
 						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
 						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
-						"settings-retina": "unpackage/res/icons/58x58.png","retina8":"/Users/thomas/Pictures/com.tencent.qq/APP_icon(1).png","settings-retina8":"unpackage/res/icons/87x87.png"
+						"settings-retina": "unpackage/res/icons/58x58.png",
+						"retina8": "/Users/thomas/Pictures/com.tencent.qq/APP_icon(1).png",
+						"settings-retina8": "unpackage/res/icons/87x87.png"
 					},
 					"ipad": {
 						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
@@ -129,9 +110,12 @@
 			"splashscreen": {
 				"ios": {
 					"iphone": {
-						 /*iPhone3启动图片选，分辨率：320x480*/
+						/*iPhone3启动图片选，分辨率：320x480*/
 						"retina35": "/Users/thomas/Pictures/com.tencent.qq/苹果_png/640x960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": "/Users/thomas/Pictures/com.tencent.qq/苹果_png/640x1136.png","retina55":"/Users/thomas/Pictures/com.tencent.qq/苹果_png/1242x2208.png","retina47":"/Users/thomas/Pictures/com.tencent.qq/苹果_png/750x1334.png","retina55l":"/Users/thomas/Pictures/com.tencent.qq/苹果_png/2208x1242.png"
+						"retina40": "/Users/thomas/Pictures/com.tencent.qq/苹果_png/640x1136.png",
+						"retina55": "/Users/thomas/Pictures/com.tencent.qq/苹果_png/1242x2208.png",
+						"retina47": "/Users/thomas/Pictures/com.tencent.qq/苹果_png/750x1334.png",
+						"retina55l": "/Users/thomas/Pictures/com.tencent.qq/苹果_png/2208x1242.png"
 					},
 					"ipad": {
 						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
@@ -154,5 +138,5 @@
 			}
 		}
 	},
-	"fullscreen": true
+	"fullscreen": false
 }

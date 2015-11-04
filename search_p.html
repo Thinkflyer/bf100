@@ -138,6 +138,8 @@
 							});
 						}, 100);
 					};
+					plus.nativeUI.closeWaiting();
+
 					//*点击获取验证码*/	
 					var get_auth = doc.getElementById('get_auth');
 					get_auth.addEventListener('tap', function(event) {
@@ -200,7 +202,6 @@
 								}
 							}
 						}
-						plus.nativeUI.showWaiting();
 						Zepto('#loadding').show();
 						$.ajax({
 							type: 'POST',
@@ -224,6 +225,7 @@
 										Zepto('#result').append("<div class='company_list'><li><span class='cname'>" + data.Result[i].Name + "</span></li><span  class='cname_gray'>所在工商管理局: " + data.Result[i].BelongOrg + "&nbsp;&nbsp; 法人: " + data.Result[i].OperName + "&nbsp;&nbsp; 企业状态: " + data.Result[i].Status + "</span></div>");
 									}
 									Zepto('.back_box').show();
+
 								} else {
 									Zepto('#result').html(data.Message);
 								}
@@ -232,12 +234,11 @@
 								plus.nativeUI.toast("服务器通讯异常");
 							}
 						});
-						
-						plus.nativeUI.closeWaiting();
 					});
 				});
 			}(mui, document));
-
+	 //页面加载完成需要等待load
+	
 			function timer(time) {
 				var btn = Zepto('#get_auth');
 				btn.attr("disabled", true); //按钮禁止点击

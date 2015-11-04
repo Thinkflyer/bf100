@@ -1,5 +1,5 @@
 var _nologin= 0;
-var baseDomain="http://cj.test.com/";
+var baseDomain="http://www.100bf.net/";
 var basepath="/";
 var jump_baseurl="main.html";
 var thumb_img=null;
