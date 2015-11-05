@@ -4,7 +4,7 @@ var basepath="/";
 var jump_baseurl="main.html";
 var thumb_img=null;
 var statusBarBackground='#f7f7f7';
-var noavatar_img=baseDomain+"/Public/Images/no_avatar.jpg";
+var noavatar_img=baseDomain+"Public/Images/no_avatar.jpg";
 var max_uploads_images=3;
 /*提示翻译*/
 var mylang={
@@ -28,5 +28,5 @@ var regBox = {
         regName : /^[0-9_-]{6}$/,//用户名
         regMobile : /^0?1[3|4|5|6|8][0-9]\d{8}$/,//手机
  }
-//引用其他css 样式表
+//引用其他css 样式表 
 document.write("<link href=\""+baseDomain+"Public/Mobile/css/style.css\" rel='stylesheet' />");
