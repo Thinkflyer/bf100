@@ -29,7 +29,7 @@
 			}
 			.mui-grid-view.mui-grid-9 {
 				background-color: #ffffff;
-				margin-top: -3px;
+				margin-top: -5px;
 			}
 			.mui-table-view.mui-grid-view .mui-table-view-cell {
 				display: inline-block;
@@ -56,8 +56,8 @@
 			}
 		</style>
 	</head>
-
 	<body>
+	<div class="mui-inner-wrap">
 		<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
 			<h1 class="mui-title">包创业</h1>
 			<a class="mui-icon mui-icon-bars mui-pull-left" id="leftmenu"></a>
@@ -73,7 +73,6 @@
 			<!--九宫格-->
 			<ul class="mui-table-view mui-grid-view mui-grid-9">
 				<li class="mui-table-view-cell mui-media mui-col-xs-4">
-
 					<a href="search.html" class="iconfont icon icon-001 menu_ico1">
 						<div class="menu_box">
 							<span class="mui-media-title">公司查名</span>
@@ -173,6 +172,7 @@
 				$.init();
 				$.plusReady(function() {
 					main = plus.webview.currentWebview();
+					plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
 					main.addEventListener('maskClick', closeMenu);
 					//处理侧滑导航，为了避免和子页面初始化等竞争资源，延迟加载侧滑页面；
 					setTimeout(function() {
@@ -275,9 +275,9 @@
 				}
 			};
 			 //敲击顶部导航，内容区回到顶部
-			document.querySelector('header').addEventListener('doubletap', function() {
-				main.children()[0].evalJS('mui.scrollTo(0, 100)');
-			});
+//			document.querySelector('header').addEventListener('doubletap', function() {
+//				main.children()[0].evalJS('mui.scrollTo(0, 100)');
+//			});
 			 //主界面向右滑动，若菜单未显示，则显示菜单；否则不做任何操作
 			window.addEventListener("swiperight", openMenu);
 			 //主界面向左滑动，若菜单已显示，则关闭菜单；否则，不做任何操作；
