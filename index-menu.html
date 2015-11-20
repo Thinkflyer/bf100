@@ -88,7 +88,7 @@
 		<div class="left_mui-content">
 	
 			<div class="left_menu_myface" >
-				<img id="avatar" src="./images/avatar.png" title="个人头像"/>
+				<img id="avatar" src="./images//avatar_nologin.png" title="个人头像"/>
 				<p id="user_account"></p>			
 			</div>
 			<ul class="mui-table-view mui-table-view-chevron mui-table-view-inverted" style="color: #ddd;">
@@ -98,20 +98,16 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="link.html" open-type="link" open-linkurl="Page/list/50.html" open-title="联系我们"   >
+					<a class="mui-navigate-right" href="link.html" open-type="link" open-linkurl="Page/list/37.html" open-title="联系我们"   >
 						<span class="mui-icon mui-icon-chatbubble left_menu_ico2"></span>联系我们
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="news.html" open-type="page" open-sid="35">
+					<a class="mui-navigate-right" href="link.html" open-title="关于我们" open-type="link" open-linkurl="Page/list/35.html">
 						<span class="mui-icon mui-icon-info left_menu_ico3"></span>关于我们
 					</a>
 				</li>
-				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right"  href="news.html" open-type="page" open-sid="40">
-						<span class="mui-icon mui-icon-loop left_menu_ico4"></span>版本更新
-					</a>
-				</li>
+				
 				
 				<p style="margin-top:3em"></p>
 				<p style="margin: 10px 15px;text-align:center" id="login_box">
@@ -175,7 +171,8 @@
 					url: 'reg.html',
 					id: 'reg',
 					show: {
-						aniShow: 'pop-in'
+						aniShow: 'pop-in',
+                        autoShow: false
 					},
 					waiting: {
 						autoShow: false
@@ -190,7 +187,9 @@
 					url: 'login.html',
 					id: 'login',
 					show: {
-						aniShow: 'pop-in'
+						aniShow: 'pop-in',
+                        autoShow: false
+
 					},
 					waiting: {
 						autoShow: false
@@ -209,7 +208,9 @@
 					url: 'login.html',
 					id: 'login',
 					show: {
-						aniShow: 'pop-in'
+						aniShow: 'pop-in',
+                        autoShow: false
+
 					},
 					waiting: {
 						autoShow: false
@@ -235,7 +236,8 @@
 							url: 'login.html',
 							id: 'login',
 							show: {
-								aniShow: 'pop-in'
+								aniShow: 'pop-in',
+                                autoShow: false
 							},
 							waiting: {
 								autoShow: false
@@ -275,7 +277,9 @@
 									url: 'login.html',
 									id: 'login',
 									show: {
-										aniShow: 'pop-in'
+										aniShow: 'pop-in',
+                                        autoShow: false
+
 									},
 									waiting: {
 										autoShow: false
@@ -304,7 +308,9 @@
 						url: id,
 						styles: webview_style,
 						show: {
-							aniShow: aniShow
+							aniShow: aniShow,
+                            autoShow: false
+
 						},
 						waiting: {
 							autoShow: false
@@ -328,13 +334,13 @@
 				//判断是否登陆状态
 				if(state.account){
 					//登陆状态 avatar
-					document.getElementById("avatar").src="./images/avatar_new.png?"+Math.random();
+					document.getElementById("avatar").src="./images/avatar.png?"+Math.random();
 					document.getElementById("user_account").innerHTML=state.account;
 					document.getElementById("login_box").style.display="none";
 					document.getElementById("loginout_box").style.display="block";
 
 					}else{
-					document.getElementById("avatar").src="./images/avatar.png?"+Math.random();
+					document.getElementById("avatar").src="./images/avatar_nologin.png?"+Math.random();
 					document.getElementById("user_account").innerHTML='';
 					document.getElementById("login_box").style.display="block";
 					document.getElementById("loginout_box").style.display="none";

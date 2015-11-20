@@ -130,7 +130,8 @@
 								id: 'main',
 								url: 'main.html',
 								show: {
-									aniShow: 'pop-in'
+									aniShow: 'pop-in',
+                                    autoShow:false
 								},
 								waiting: {
 									autoShow: false
@@ -138,8 +139,8 @@
 							});
 						}, 100);
 					};
-					plus.nativeUI.closeWaiting();
-
+                            plus.nativeUI.closeWaiting();
+                            plus.webview.currentWebview().show();
 					//*点击获取验证码*/	
 					var get_auth = doc.getElementById('get_auth');
 					get_auth.addEventListener('tap', function(event) {

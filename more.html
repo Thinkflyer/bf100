@@ -96,8 +96,9 @@
 					var state = app.getState();
 					m_token=state.token;
 				}
-				plus.nativeUI.closeWaiting();
-			}
+                plus.nativeUI.closeWaiting();
+                plus.webview.currentWebview().show();
+            }
 			if (window.plus) {
 				plusReady();
 			} else {
@@ -132,15 +133,15 @@
 							plus.nativeUI.toast(mylang['error_network']);
 						}
 					});
-				plus.nativeUI.closeWaiting();
-
+                    plus.nativeUI.closeWaiting();
+                    plus.webview.currentWebview().show();
 				}
 				//触发第一页
 			if (mui.os.plus) {
 				mui.plusReady(function() {
 					setTimeout(function() {
 						mui('#pullrefresh').pullRefresh().pullupLoading();
-					}, 1000);
+					}, 200);
 				});
 			} else {
 				mui.ready(function() {
@@ -160,6 +161,10 @@
 						autoShow: true,
 						 title:'正在加载...',//等待对话框上显示的提示内容
 					},
+                    show: {
+                         aniShow: 'pop-in',
+                         autoShow: false
+                    },
 					styles: {
 						zindex: 1,
 					},

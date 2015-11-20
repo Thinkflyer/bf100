@@ -120,7 +120,9 @@
 						//console.log(JSON.stringify(xhr));
 					}
 				});
-				plus.nativeUI.closeWaiting();
+                plus.nativeUI.closeWaiting();
+                plus.webview.currentWebview().show();
+                
 			};
 			if (window.plus) {
 				plusReady();
@@ -141,7 +143,8 @@
 						id: id,
 						url: href,
 						show: {
-							aniShow: 'pop-in'
+							aniShow: 'pop-in',
+                            autoShow: false
 						},
 						waiting: {
 							autoShow: false

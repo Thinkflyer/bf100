@@ -142,23 +142,15 @@
 			(function($, doc) {
 				$.init();
 				$.plusReady(function() {
-								 setTimeout(function(){
-				        var array = plus.webview.all();
-
-				         console.log("==========1");
-				        if(array){
-				            for(var i=0,len=array.length;i<len;i++){
-				                    console.log(array[i].id);
-				                }
-				        }
-						console.log("==========2");
-						
+					setTimeout(function(){					
 						main = $.preload({
 							id: 'HBuilder',
 							url: 'main.html',
 						});
 												
 				    },100);
+                            plus.nativeUI.closeWaiting();
+                            plus.webview.currentWebview().show();
 					var settings = app.getSettings();
 					var regButton = doc.getElementById('reg');
 					var auth=doc.getElementById('auth');

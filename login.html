@@ -155,6 +155,10 @@
 						//关闭 splash
 						plus.navigator.closeSplashscreen();
 					}, 200);
+                            
+                            plus.nativeUI.closeWaiting();
+                            plus.webview.currentWebview().show();
+                
 					//检查 "登录状态/锁屏状态" 结束
 					var loginButton = doc.getElementById('login');
 					var accountBox = doc.getElementById('account');
@@ -204,9 +208,10 @@
 						$.openWindow({
 							url: 'reg.html',
 							id: 'reg',
-							show: {
-								aniShow: 'pop-in'
-							},
+                            show: {
+                                     aniShow: 'pop-in',
+                                     autoShow: false
+                            },
 							styles: {
 								popGesture: 'hide'
 							},
@@ -224,9 +229,10 @@
 						$.openWindow({
 							url: 'forget_password.html',
 							id: 'forget_password',
-							show: {
-								aniShow: 'pop-in'
-							},
+                            show: {
+                                aniShow: 'pop-in',
+                                autoShow: false
+                            },
 							styles: {
 								popGesture: 'hide'
 							},

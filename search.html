@@ -136,8 +136,8 @@
 						"id": 'main',
 						"url": 'main.html'
 					});
-					plus.nativeUI.closeWaiting();
-					var toMain = function() {
+                            plus.nativeUI.closeWaiting();
+                            plus.webview.currentWebview().show();					var toMain = function() {
 						$.fire(mainPage, 'show', null);
 						setTimeout(function() {
 							$.openWindow({

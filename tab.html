@@ -158,8 +158,8 @@
 					var state = app.getState();
 					m_token=state.token;
 			}
-				plus.nativeUI.closeWaiting();
-			
+                plus.nativeUI.closeWaiting();
+                plus.webview.currentWebview().show();
 			
 			
 			mui('.mui-scroll-wrapper').scroll({
@@ -207,6 +207,9 @@
 						autoShow: true,
 						 title:'正在加载...',//等待对话框上显示的提示内容
 					},
+                    show:{
+                        autoShow:false
+                    },
 					styles: {
 						zindex: 1,
 					},

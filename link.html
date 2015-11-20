@@ -55,8 +55,9 @@
 	mui.init();
 function plusReady(){
 	ws=plus.webview.currentWebview();
-	plus.nativeUI.closeWaiting();
-	var linkurl = ws.linkurl;
+    plus.nativeUI.closeWaiting();
+    plus.webview.currentWebview().show();
+    var linkurl = ws.linkurl;
 	var title = ws.title;
 	if(typeof(title)!="undefined") 	Zepto('#title').html(title);
 	if(linkurl.indexOf("http")>=0)
@@ -91,7 +92,8 @@ if(window.plus){
 						id: id,
 						url: href,
 						show: {
-							aniShow: 'pop-in'
+							aniShow: 'pop-in',
+                            autoShow: false
 						},
 						waiting: {
 							autoShow: false

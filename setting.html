@@ -125,7 +125,8 @@
 		var plusReady = function() {
 		var self = plus.webview.currentWebview();
 		
-			
+        plus.nativeUI.closeWaiting();
+        plus.webview.currentWebview().show();
 			
 		}
 			
@@ -146,9 +147,12 @@
 					id: id,
 					url: href,
 					waiting: {
-						autoShow: true,
-						 title:'正在加载...',//等待对话框上显示的提示内容
+						autoShow: false,
 					},
+                     show: {
+                         aniShow: 'pop-in',
+                         autoShow: false
+                     },
 					styles: {
 						zindex: 1,
 					},
